@@ -17,30 +17,17 @@ go test ./benchmark -run TestExecutionTime -v
 ```
 
 ```
-init tileset: 29.507ms
-create tile: 9.903ms
-mesh (max error = 30): 0.976ms
-vertices: 9708, triangles: 19094
-mesh 0: 13.710ms
-mesh 1: 13.081ms
-mesh 2: 11.180ms
-mesh 3: 14.529ms
-mesh 4: 15.032ms
-mesh 5: 12.161ms
-mesh 6: 10.418ms
-mesh 7: 8.926ms
-mesh 8: 7.783ms
-mesh 9: 7.231ms
-mesh 10: 6.576ms
-mesh 11: 5.793ms
-mesh 12: 5.020ms
-mesh 13: 4.550ms
-mesh 14: 4.193ms
-mesh 15: 3.833ms
-mesh 16: 3.496ms
-mesh 17: 3.153ms
-mesh 18: 2.945ms
-mesh 19: 2.725ms
-mesh 20: 2.529ms
-20 meshes total: 159.038ms
+init tileset:           39.450ms
+create tile:            10.201ms
+mesh (max error = 0):   14.202ms  (vertices: 261880, triangles: 521768)
+mesh (max error = 2):   11.739ms  (vertices: 176260, triangles: 351014)
+mesh (max error = 5):   6.633ms   (vertices: 94496,  triangles: 187912)
+mesh (max error = 10):  3.313ms   (vertices: 45107,  triangles: 89490)
+mesh (max error = 20):  1.329ms   (vertices: 17764,  triangles: 35095)
+mesh (max error = 30):  0.779ms   (vertices: 9708,   triangles: 19094)
+mesh (max error = 50):  0.361ms   (vertices: 4234,   triangles: 8261)
+mesh (max error = 75):  0.191ms   (vertices: 2117,   triangles: 4094)
+mesh (max error = 100): 0.120ms   (vertices: 1239,   triangles: 2373)
+mesh (max error = 250): 0.032ms   (vertices: 200,    triangles: 359)
+mesh (max error = 500): 0.018ms   (vertices: 46,     triangles: 75)
 ```
