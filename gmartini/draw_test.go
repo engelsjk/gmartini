@@ -12,9 +12,9 @@ import (
 
 func TestDrawTerrain(t *testing.T) {
 
-	var terrainFile string = "data/fuji.png"
+	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
-	var imageFile string = "test/terrain.png"
+	var imageFile string = "../test/terrain.png"
 
 	file, err := os.Open(terrainFile)
 	if err != nil {
@@ -75,11 +75,11 @@ func load(terrainFile, encoding string, gridSize uint, maxError float32) ([]floa
 
 func TestDrawVerticesErr5(t *testing.T) {
 
-	var terrainFile string = "data/fuji.png"
+	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
 	var gridSize uint = 513
 	var maxError float32 = 5.0
-	var imageFile string = "test/vertices-%d.png"
+	var imageFile string = "../test/vertices-%d.png"
 
 	_, mesh := load(terrainFile, encoding, gridSize, maxError)
 
@@ -94,11 +94,11 @@ func TestDrawVerticesErr5(t *testing.T) {
 
 func TestDrawVerticesErr50(t *testing.T) {
 
-	var terrainFile string = "data/fuji.png"
+	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
 	var gridSize uint = 513
 	var maxError float32 = 50.0
-	var imageFile string = "test/vertices-%d.png"
+	var imageFile string = "../test/vertices-%d.png"
 
 	_, mesh := load(terrainFile, encoding, gridSize, maxError)
 
@@ -113,11 +113,11 @@ func TestDrawVerticesErr50(t *testing.T) {
 
 func TestDrawVerticesErr500(t *testing.T) {
 
-	var terrainFile string = "data/fuji.png"
+	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
 	var gridSize uint = 513
 	var maxError float32 = 500.0
-	var imageFile string = "test/vertices-%d.png"
+	var imageFile string = "../test/vertices-%d.png"
 
 	_, mesh := load(terrainFile, encoding, gridSize, maxError)
 
@@ -132,7 +132,7 @@ func TestDrawVerticesErr500(t *testing.T) {
 
 func TestDrawTrianglesErr5(t *testing.T) {
 
-	var terrainFile string = "data/fuji.png"
+	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
 	var gridSize uint = 513
 	var maxError float32 = 5.0
@@ -151,7 +151,7 @@ func TestDrawTrianglesErr5(t *testing.T) {
 
 func TestDrawTrianglesErr50(t *testing.T) {
 
-	var terrainFile string = "data/fuji.png"
+	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
 	var gridSize uint = 513
 	var maxError float32 = 50.0
@@ -170,11 +170,11 @@ func TestDrawTrianglesErr50(t *testing.T) {
 
 func TestDrawTrianglesErr500(t *testing.T) {
 
-	var terrainFile string = "data/fuji.png"
+	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
 	var gridSize uint = 513
 	var maxError float32 = 500.0
-	var imageFile string = "test/triangles-%d.png"
+	var imageFile string = "../test/triangles-%d.png"
 
 	_, mesh := load(terrainFile, encoding, gridSize, maxError)
 
@@ -189,11 +189,11 @@ func TestDrawTrianglesErr500(t *testing.T) {
 
 func TestDrawAll(t *testing.T) {
 
-	var terrainFile string = "data/fuji.png"
+	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
 	var gridSize uint = 513
 	var maxError float32 = 50.0
-	var imageFile string = "test/martini-%d.png"
+	var imageFile string = "../test/martini-%d.png"
 
 	terrain, mesh := load(terrainFile, encoding, gridSize, maxError)
 

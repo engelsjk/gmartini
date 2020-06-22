@@ -11,7 +11,7 @@ func TestMesh(t *testing.T) {
 
 	// reference mesh : https://github.com/mapbox/martini/blob/master/test/test.js
 
-	var terrainFile string = "data/fuji.png"
+	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
 	var gridSize uint = 513
 	var maxError float32 = 500.0
