@@ -40,6 +40,11 @@ func minFloat32(vars ...float32) float32 {
 	return min
 }
 
+func absUint16(n uint16) uint16 {
+	y := n >> 15
+	return (n ^ y) - y
+}
+
 func absFloat32(x float32) float32 {
 	if x < 0 {
 		return -x
