@@ -12,6 +12,8 @@ type Martini struct {
 	Coords             []int32
 }
 
+// New instantiates a Martini instance which includes a CreateTile method and also inititializes arrays for both Coords and Indices.
+// By default, Martini assumes a 257 grid size (2^n+1) but can be initialized with a different OptionGridSize(gridSize int32).
 func New(opts ...func(*Martini) error) (*Martini, error) {
 	martini := &Martini{}
 	martini.GridSize = 257
@@ -75,6 +77,7 @@ func New(opts ...func(*Martini) error) (*Martini, error) {
 	return martini, nil
 }
 
+// OptionGridSize can be used to specify the gridsize (int32) in initializing a Martini instance.
 func OptionGridSize(gridSize int32) func(*Martini) error {
 	return func(m *Martini) error {
 		m.GridSize = gridSize
@@ -82,6 +85,8 @@ func OptionGridSize(gridSize int32) func(*Martini) error {
 	}
 }
 
+// CreateTile creates a Tile instance of the generated RTIN hierarchy based on the specified terrain map.
+// This hierarchy is an array of error values determined by interpolated height values relative to the terrain map.
 func (m *Martini) CreateTile(terrain []float32) (*Tile, error) {
 	return NewTile(terrain, m)
 }

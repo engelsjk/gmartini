@@ -14,6 +14,8 @@ type Tile struct {
 	Errors             []float32
 }
 
+// NewTile instantiates a new Tile instance of the generated RTIN hierarchy using a specified terrain map and an initialized Martini instance.
+// This hierarchy is an array of error values determined by interpolated height values relative to the specified terrain map.
 func NewTile(terrain []float32, martini *Martini) (*Tile, error) {
 	tile := &Tile{}
 
@@ -33,11 +35,11 @@ func NewTile(terrain []float32, martini *Martini) (*Tile, error) {
 	tile.Indices = martini.Indices
 	tile.Coords = martini.Coords
 
-	tile.Update()
+	tile.update()
 	return tile, nil
 }
 
-func (t *Tile) Update() {
+func (t *Tile) update() {
 
 	var k int
 	var ax, ay, bx, by, cx, cy, mx, my int32
@@ -75,6 +77,7 @@ func (t *Tile) Update() {
 	}
 }
 
+// GetMesh generates a new mesh of vertices and triangles for the Tile with a max error (default 0).
 func (t *Tile) GetMesh(opts ...func(*Mesh) error) *Mesh {
 	return NewMesh(t, opts...)
 }

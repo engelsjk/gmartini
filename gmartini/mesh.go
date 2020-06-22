@@ -9,6 +9,7 @@ type Mesh struct {
 	Triangles    []int32
 }
 
+// NewMesh instanties a new mesh for the specified Tile with a max error (default 0).
 func NewMesh(tile *Tile, opts ...func(*Mesh) error) *Mesh {
 	mesh := &Mesh{}
 	mesh.NumVertices = 0
@@ -45,6 +46,7 @@ func NewMesh(tile *Tile, opts ...func(*Mesh) error) *Mesh {
 	return mesh
 }
 
+// OptionMaxError can be used to set the max error of the generated Mesh.
 func OptionMaxError(maxError float32) func(*Mesh) error {
 	return func(m *Mesh) error {
 		m.MaxError = maxError

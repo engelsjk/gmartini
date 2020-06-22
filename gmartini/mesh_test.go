@@ -24,7 +24,7 @@ func testMesh(expectedVertices, expectedTriangles []int32, maxError float32, t *
 		t.Error(err)
 	}
 
-	terrain, err := DecodeElevations(img, encoding, true)
+	terrain, err := DecodeElevation(img, encoding, true)
 	if err != nil {
 		t.Error(err)
 	}

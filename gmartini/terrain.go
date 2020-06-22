@@ -7,7 +7,9 @@ import (
 	"strings"
 )
 
-func DecodeElevations(img image.Image, encoding string, addBackfill bool) ([]float32, error) {
+// DecodeElevation decodes the pixel values of an image.Image (e.g. a Mapbox Terrain RGB raster tile) into a 1D array of heightmap values.
+// A backfill option is included to satisfy the martini requirement of a 2^n+1 grid size.
+func DecodeElevation(img image.Image, encoding string, addBackfill bool) ([]float32, error) {
 
 	allowedEncodings := make(map[string]bool)
 	allowedEncodings["mapbox"] = true

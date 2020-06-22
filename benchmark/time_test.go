@@ -33,7 +33,7 @@ func TestExecutionTime(t *testing.T) {
 		panic(err)
 	}
 
-	terrain, err := gmartini.DecodeElevations(img, encoding, true)
+	terrain, err := gmartini.DecodeElevation(img, encoding, true)
 	if err != nil {
 		panic(err)
 	}

@@ -76,7 +76,7 @@ func TestDrawTerrain(t *testing.T) {
 		t.Error(err)
 	}
 
-	terrain, err := DecodeElevations(img, encoding, true)
+	terrain, err := DecodeElevation(img, encoding, true)
 	if err != nil {
 		t.Error(err)
 	}
@@ -103,7 +103,7 @@ func load(terrainFile, encoding string, gridSize int32, maxError float32) ([]flo
 		panic(err)
 	}
 
-	terrain, err := DecodeElevations(img, encoding, true)
+	terrain, err := DecodeElevation(img, encoding, true)
 	if err != nil {
 		panic(err)
 	}

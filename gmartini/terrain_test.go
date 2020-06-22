@@ -32,7 +32,7 @@ func TestTerrain(t *testing.T) {
 		t.Error(err)
 	}
 
-	terrain, err := DecodeElevations(img, encoding, true)
+	terrain, err := DecodeElevation(img, encoding, true)
 	if err != nil {
 		t.Error(err)
 	}
