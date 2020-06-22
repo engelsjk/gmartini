@@ -34,7 +34,7 @@ go get github.com/engelsjk/gmartini
   
 ## Benchmark
 
-Benchmarking shows comparable results to [pymartini](https://github.com/kylebarron/pymartini) in mesh generation but slower in preparation steps.
+Benchmarking shows comparable results to [mapbox/martini](https://github.com/mapbox/martini) for preparation steps and to [pymartini](https://github.com/kylebarron/pymartini) for mesh generation.
 
 ```bash
 go test ./benchmark -run TestExecutionTime -v
