@@ -10,7 +10,7 @@ import (
 
 func BenchmarkTile(b *testing.B) {
 
-	var terrainFile string = "data/fuji.png"
+	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
 	var gridSize int32 = 513
 
