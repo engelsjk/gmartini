@@ -21,7 +21,6 @@ func TestExecutionTime(t *testing.T) {
 	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
 	var gridSize int32 = 513
-	var maxError float32 = 30
 
 	file, err := os.Open(terrainFile)
 	if err != nil {
@@ -49,16 +48,11 @@ func TestExecutionTime(t *testing.T) {
 		panic(err)
 	}
 
-	numVertices, numTriangles := generateMesh(tile, maxError, 0, true)
-	log.Printf("vertices: %d, triangles: %d\n", numVertices, numTriangles)
+	maxErrors := []float32{0, 2, 5, 10, 20, 30, 50, 75, 100, 250, 500}
 
-	numMeshes := 20
-	start := time.Now()
-	for i := 0; i < (numMeshes + 1); i++ {
-		generateMesh(tile, float32(i), i, false)
+	for i := 0; i < len(maxErrors); i++ {
+		generateMesh(tile, maxErrors[i])
 	}
-	elapsed := time.Since(start)
-	log.Printf("%d meshes total: %.03fms", numMeshes, float64(elapsed.Nanoseconds())/1000000)
 }
 
 func initTileset(gridSize int32) (*gmartini.Martini, error) {
@@ -71,12 +65,13 @@ func createTile(martini *gmartini.Martini, terrain []float32) (*gmartini.Tile, e
 	return martini.CreateTile(terrain)
 }
 
-func generateMesh(tile *gmartini.Tile, maxError float32, n int, verbose bool) (int32, int) {
-	name := fmt.Sprintf("mesh %d", n)
-	if verbose {
-		name = fmt.Sprintf("mesh (max error = %.0f)", maxError)
-	}
-	defer stopwatch(time.Now(), name)
+func generateMesh(tile *gmartini.Tile, maxError float32) {
+	start := time.Now()
 	mesh := tile.GetMesh(gmartini.OptionMaxError(maxError))
-	return mesh.NumVertices, mesh.NumTriangles
+	elapsed := time.Since(start)
+
+	name := fmt.Sprintf("mesh (max error = %.0f)", maxError)
+	vt := fmt.Sprintf("(vertices: %d, triangles: %d)", mesh.NumVertices, mesh.NumTriangles)
+
+	log.Printf("%s: %.03fms %s\n", name, float64(elapsed.Nanoseconds())/1000000, vt)
 }
