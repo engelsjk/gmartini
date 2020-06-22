@@ -2,11 +2,11 @@ package gmartini
 
 type Mesh struct {
 	MaxError     float32
-	NumVertices  uint32
-	NumTriangles uint32
-	TriIndex     uint
-	Vertices     []uint16
-	Triangles    []uint32
+	NumVertices  int32
+	NumTriangles int
+	TriIndex     int
+	Vertices     []int32
+	Triangles    []int32
 }
 
 func NewMesh(tile *Tile, opts ...func(*Mesh) error) *Mesh {
@@ -22,8 +22,7 @@ func NewMesh(tile *Tile, opts ...func(*Mesh) error) *Mesh {
 		}
 	}
 
-	size := uint16(tile.GridSize)
-	max := size - 1
+	max := tile.GridSize - 1
 
 	// use an index grid to keep track of vertices that were already used to avoid duplication
 	for i := range tile.Indices {
@@ -37,8 +36,8 @@ func NewMesh(tile *Tile, opts ...func(*Mesh) error) *Mesh {
 	mesh.countElements(tile, 0, 0, max, max, max, 0)
 	mesh.countElements(tile, max, max, 0, 0, 0, max)
 
-	mesh.Vertices = make([]uint16, mesh.NumVertices*2)
-	mesh.Triangles = make([]uint32, mesh.NumTriangles*3)
+	mesh.Vertices = make([]int32, mesh.NumVertices*2)
+	mesh.Triangles = make([]int32, mesh.NumTriangles*3)
 	mesh.TriIndex = 0
 
 	mesh.processTriangle(tile, 0, 0, max, max, max, 0)
@@ -53,26 +52,21 @@ func OptionMaxError(maxError float32) func(*Mesh) error {
 	}
 }
 
-func (m *Mesh) countElements(tile *Tile, ax, ay, bx, by, cx, cy uint16) {
-
-	size := uint16(tile.GridSize)
+func (m *Mesh) countElements(tile *Tile, ax, ay, bx, by, cx, cy int32) {
 
 	mx := (ax + bx) >> 1
 	my := (ay + by) >> 1
 
-	absAxCx := maxUint16(ax, cx) - minUint16(ax, cx)
-	absAyCy := maxUint16(ay, cy) - minUint16(ay, cy)
+	middleIndex := my*tile.GridSize + mx
 
-	middleIndex := uint(my)*uint(size) + uint(mx)
-
-	if absAxCx+absAyCy > 1 && tile.Errors[middleIndex] > m.MaxError {
+	if absInt32(ax-cx)+absInt32(ay-cy) > 1 && tile.Errors[middleIndex] > m.MaxError {
 		m.countElements(tile, cx, cy, ax, ay, mx, my)
 		m.countElements(tile, bx, by, cx, cy, mx, my)
 	} else {
 
-		aIndex := uint(ay)*uint(size) + uint(ax)
-		bIndex := uint(by)*uint(size) + uint(bx)
-		cIndex := uint(cy)*uint(size) + uint(cx)
+		aIndex := ay*tile.GridSize + ax
+		bIndex := by*tile.GridSize + bx
+		cIndex := cy*tile.GridSize + cx
 
 		if tile.Indices[aIndex] == 0 {
 			m.NumVertices++
@@ -90,27 +84,24 @@ func (m *Mesh) countElements(tile *Tile, ax, ay, bx, by, cx, cy uint16) {
 	}
 }
 
-func (m *Mesh) processTriangle(tile *Tile, ax, ay, bx, by, cx, cy uint16) {
+func (m *Mesh) processTriangle(tile *Tile, ax, ay, bx, by, cx, cy int32) {
+
 	mx := (ax + bx) >> 1
 	my := (ay + by) >> 1
 
 	indices := tile.Indices
-	size := uint16(tile.GridSize)
 
-	absAxCx := maxUint16(ax, cx) - minUint16(ax, cx)
-	absAyCy := maxUint16(ay, cy) - minUint16(ay, cy)
+	middleIndex := my*tile.GridSize + mx
 
-	middleIndex := uint(my)*uint(size) + uint(mx)
-
-	if absAxCx+absAyCy > 1 && tile.Errors[middleIndex] > m.MaxError {
+	if absInt32(ax-cx)+absInt32(ay-cy) > 1 && tile.Errors[middleIndex] > m.MaxError {
 		// triangle doesn't approximate the surface well enough; drill down further
 		m.processTriangle(tile, cx, cy, ax, ay, mx, my)
 		m.processTriangle(tile, bx, by, cx, cy, mx, my)
 	} else {
 
-		aIndex := uint(ay)*uint(size) + uint(ax) // x*row+y
-		bIndex := uint(by)*uint(size) + uint(bx)
-		cIndex := uint(cy)*uint(size) + uint(cx)
+		aIndex := ay*tile.GridSize + ax
+		bIndex := by*tile.GridSize + bx
+		cIndex := cy*tile.GridSize + cx
 
 		// add a triangle
 		a := indices[aIndex] - 1

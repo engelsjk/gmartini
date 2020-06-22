@@ -5,11 +5,11 @@ import (
 )
 
 type Martini struct {
-	GridSize           uint
+	GridSize           int32
 	NumTriangles       int
 	NumParentTriangles int
-	Indices            []uint32
-	Coords             []uint16
+	Indices            []int32
+	Coords             []int32
 }
 
 func New(opts ...func(*Martini) error) (*Martini, error) {
@@ -31,19 +31,19 @@ func New(opts ...func(*Martini) error) (*Martini, error) {
 	martini.NumTriangles = int(tileSize*tileSize*2 - 2)
 	martini.NumParentTriangles = martini.NumTriangles - int(tileSize*tileSize)
 
-	martini.Indices = make([]uint32, martini.GridSize*martini.GridSize)
+	martini.Indices = make([]int32, martini.GridSize*martini.GridSize)
 
 	// coordinates for all possible triangles in an RTIN tile
-	martini.Coords = make([]uint16, martini.NumTriangles*4)
+	martini.Coords = make([]int32, martini.NumTriangles*4)
 
 	// get triangle coordinates from its index in an implicit binary tree
-	var id, k uint
-	var ax, ay, bx, by, cx, cy uint16
+	var id, k int
+	var ax, ay, bx, by, cx, cy int32
 
-	size := uint16(tileSize)
+	size := tileSize
 
-	for i := 0; i < int(martini.NumTriangles); i++ {
-		id = uint(i + 2)
+	for i := 0; i < martini.NumTriangles; i++ {
+		id = i + 2
 
 		ax, ay, bx, by, cx, cy = 0, 0, 0, 0, 0, 0
 		if id&1 == 1 {
@@ -66,7 +66,7 @@ func New(opts ...func(*Martini) error) (*Martini, error) {
 			}
 			cx, cy = mx, my
 		}
-		k = uint(i * 4)
+		k = i * 4
 		martini.Coords[k+0] = ax
 		martini.Coords[k+1] = ay
 		martini.Coords[k+2] = bx
@@ -75,7 +75,7 @@ func New(opts ...func(*Martini) error) (*Martini, error) {
 	return martini, nil
 }
 
-func OptionGridSize(gridSize uint) func(*Martini) error {
+func OptionGridSize(gridSize int32) func(*Martini) error {
 	return func(m *Martini) error {
 		m.GridSize = gridSize
 		return nil

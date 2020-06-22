@@ -5,11 +5,11 @@ import (
 )
 
 type Tile struct {
-	GridSize           uint
+	GridSize           int32
 	NumTriangles       int
 	NumParentTriangles int
-	Indices            []uint32
-	Coords             []uint16
+	Indices            []int32
+	Coords             []int32
 	Terrain            []float32
 	Errors             []float32
 }
@@ -17,7 +17,7 @@ type Tile struct {
 func NewTile(terrain []float32, martini *Martini) (*Tile, error) {
 	tile := &Tile{}
 
-	size := martini.GridSize
+	size := int32(martini.GridSize)
 
 	// todo: allow ndarray as input
 
@@ -40,16 +40,15 @@ func NewTile(terrain []float32, martini *Martini) (*Tile, error) {
 }
 
 func (t *Tile) Update() {
-	size := uint16(t.GridSize)
 
-	var k uint
-	var ax, ay, bx, by, cx, cy, mx, my uint16
+	var k int
+	var ax, ay, bx, by, cx, cy, mx, my int32
 	var interpolatedHeight, middleError float32
-	var middleIndex, leftChildIndex, rightChildIndex uint
-	var aIndex, bIndex uint
+	var middleIndex, leftChildIndex, rightChildIndex int32
+	var aIndex, bIndex int32
 
 	for i := t.NumTriangles - 1; i >= 0; i-- {
-		k = uint(i * 4)
+		k = i * 4
 		ax = t.Coords[k+0]
 		ay = t.Coords[k+1]
 		bx = t.Coords[k+2]
@@ -61,18 +60,18 @@ func (t *Tile) Update() {
 
 		// calculate error in the middle of the long edge of the triangle
 
-		aIndex = uint(ay)*uint(size) + uint(ax)
-		bIndex = uint(by)*uint(size) + uint(bx)
+		aIndex = ay*t.GridSize + ax
+		bIndex = by*t.GridSize + bx
 
 		interpolatedHeight = (t.Terrain[aIndex] + t.Terrain[bIndex]) / 2
-		middleIndex = uint(my)*uint(size) + uint(mx)
+		middleIndex = my*t.GridSize + mx
 		middleError = absFloat32(interpolatedHeight - t.Terrain[middleIndex])
 
 		t.Errors[middleIndex] = maxFloat32(t.Errors[middleIndex], middleError)
 
 		if i < t.NumParentTriangles { // bigger triangles; accumulate error with children
-			leftChildIndex = uint((ay+cy)>>1)*uint(size) + uint((ax+cx)>>1)
-			rightChildIndex = uint((by+cy)>>1)*uint(size) + uint((bx+cx)>>1)
+			leftChildIndex = ((ay+cy)>>1)*t.GridSize + ((ax + cx) >> 1)
+			rightChildIndex = ((by+cy)>>1)*t.GridSize + ((bx + cx) >> 1)
 			t.Errors[middleIndex] = maxFloat32(t.Errors[middleIndex], t.Errors[leftChildIndex], t.Errors[rightChildIndex])
 		}
 	}
