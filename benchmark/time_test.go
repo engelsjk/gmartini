@@ -13,7 +13,7 @@ import (
 
 func stopwatch(start time.Time, name string) {
 	elapsed := time.Since(start)
-	log.Printf("%s: %s", name, elapsed)
+	log.Printf("%s: %.03fms", name, float64(elapsed.Nanoseconds())/1000000)
 }
 
 func TestExecutionTime(t *testing.T) {
@@ -49,7 +49,8 @@ func TestExecutionTime(t *testing.T) {
 		panic(err)
 	}
 
-	generateMesh(tile, maxError, 0, true)
+	numVertices, numTriangles := generateMesh(tile, maxError, 0, true)
+	log.Printf("vertices: %d, triangles: %d\n", numVertices, numTriangles)
 
 	numMeshes := 20
 	start := time.Now()
@@ -57,7 +58,7 @@ func TestExecutionTime(t *testing.T) {
 		generateMesh(tile, float32(i), i, false)
 	}
 	elapsed := time.Since(start)
-	log.Printf("%d meshes total: %s", numMeshes, elapsed)
+	log.Printf("%d meshes total: %.03fms", numMeshes, float64(elapsed.Nanoseconds())/1000000)
 }
 
 func initTileset(gridSize int32) (*gmartini.Martini, error) {
@@ -70,20 +71,12 @@ func createTile(martini *gmartini.Martini, terrain []float32) (*gmartini.Tile, e
 	return martini.CreateTile(terrain)
 }
 
-func generateMesh(tile *gmartini.Tile, maxError float32, n int, verbose bool) {
-	var name string
+func generateMesh(tile *gmartini.Tile, maxError float32, n int, verbose bool) (int32, int) {
+	name := fmt.Sprintf("mesh %d", n)
 	if verbose {
-		name = "mesh"
-	} else {
-		name = fmt.Sprintf("mesh %d", n)
+		name = fmt.Sprintf("mesh (max error = %.0f)", maxError)
 	}
-
 	defer stopwatch(time.Now(), name)
 	mesh := tile.GetMesh(gmartini.OptionMaxError(maxError))
-
-	if verbose {
-		name = "mesh"
-		log.Printf("vertices: %d, triangles: %d\n", mesh.NumVertices, mesh.NumTriangles)
-	}
-	return
+	return mesh.NumVertices, mesh.NumTriangles
 }
