@@ -29,7 +29,7 @@ mesh := tile.GetMesh(gmartini.OptionMaxError(30))
 ## Install
 
 ```
-go get -u github.com/engelsjk/gmartini
+go get github.com/engelsjk/gmartini
 ```
   
 ## Benchmark
