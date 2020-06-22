@@ -5,12 +5,12 @@ import (
 	"os"
 	"testing"
 
-	"github.com/engelsjk/gmartini/gmartini"
+	"github.com/engelsjk/gmartini"
 )
 
 func BenchmarkTile(b *testing.B) {
 
-	var terrainFile string = "../data/fuji.png"
+	var terrainFile string = "data/fuji.png"
 	var encoding string = "mapbox"
 	var gridSize int32 = 513
 

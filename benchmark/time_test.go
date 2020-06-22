@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/engelsjk/gmartini/gmartini"
+	"github.com/engelsjk/gmartini"
 )
 
 func stopwatch(start time.Time, name string) {
@@ -18,7 +18,7 @@ func stopwatch(start time.Time, name string) {
 
 func TestExecutionTime(t *testing.T) {
 
-	var terrainFile string = "../data/fuji.png"
+	var terrainFile string = "data/fuji.png"
 	var encoding string = "mapbox"
 	var gridSize int32 = 513
 

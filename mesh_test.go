@@ -9,7 +9,7 @@ import (
 
 func testMesh(expectedVertices, expectedTriangles []int32, maxError float32, t *testing.T) {
 
-	var terrainFile string = "../data/fuji.png"
+	var terrainFile string = "data/fuji.png"
 	var encoding string = "mapbox"
 	var gridSize int32 = 513
 
