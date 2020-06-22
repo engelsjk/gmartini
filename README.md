@@ -1,6 +1,6 @@
 # gmartini
 
-~[](test/martini-50.png)
+![](test/martini-50.png)
 
 A Go port of the RTIN terrain mesh generator [mapbox/martini](https://github.com/mapbox/martini) by [mourner](https://github.com/mourner).
 
