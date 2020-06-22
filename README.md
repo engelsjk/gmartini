@@ -10,7 +10,7 @@ Sanity checks of porting correctness and static typing nuance by referencing [ky
 
 ## Mesh
 
-A mesh consisting of vertices and triangles can be generated from a Mapbox Terrain-RGB PNG image.
+A mesh consisting of vertices and triangles can be generated from a terrain PNG image.
 
 ```
 file, _ := os.Open("data/fuji.png")
