@@ -8,6 +8,24 @@ Additional info on martini can be found at the Observable notebook, "[MARTINI: R
 
 Sanity checks of porting correctness and static typing nuance provided by referencing [kylebarron](https://github.com/kylebarron)'s Cython port [pymartini](https://github.com/kylebarron/pymartini).
 
+## Mesh
+
+A mesh consisting of vertices and triangles can be generated from a Mapbox Terrain-RGB PNG image.
+
+```
+file, _ := os.Open("data/fuji.png")
+
+img, _, _ := image.Decode(file)
+
+terrain, _ := gmartini.DecodeElevation(img, "mapbox", true)
+
+martini, _ := gmartini.New(gmartini.OptionGridSize(513))
+
+tile, _ := martini.CreateTile(terrain)
+
+mesh := tile.GetMesh(gmartini.OptionMaxError(30))
+```
+  
 ## Benchmark
 
 Benchmarking shows comparable results to [pymartini](https://github.com/kylebarron/pymartini) in mesh generation but slower in preparation steps.
