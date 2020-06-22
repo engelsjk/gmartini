@@ -17,9 +17,7 @@ type Tile struct {
 func NewTile(terrain []float32, martini *Martini) (*Tile, error) {
 	tile := &Tile{}
 
-	size := int32(martini.GridSize)
-
-	// todo: allow ndarray as input
+	size := martini.GridSize
 
 	if len(terrain) != int(size*size) {
 		return nil, fmt.Errorf(`expected terrain data of length %d (%d x %d), got %d`, size*size, size, size, len(terrain))
@@ -67,12 +65,12 @@ func (t *Tile) Update() {
 		middleIndex = my*t.GridSize + mx
 		middleError = absFloat32(interpolatedHeight - t.Terrain[middleIndex])
 
-		t.Errors[middleIndex] = maxFloat32(t.Errors[middleIndex], middleError)
+		t.Errors[middleIndex] = maxFloat32x2(t.Errors[middleIndex], middleError)
 
 		if i < t.NumParentTriangles { // bigger triangles; accumulate error with children
 			leftChildIndex = ((ay+cy)>>1)*t.GridSize + ((ax + cx) >> 1)
 			rightChildIndex = ((by+cy)>>1)*t.GridSize + ((bx + cx) >> 1)
-			t.Errors[middleIndex] = maxFloat32(t.Errors[middleIndex], t.Errors[leftChildIndex], t.Errors[rightChildIndex])
+			t.Errors[middleIndex] = maxFloat32x3(t.Errors[middleIndex], t.Errors[leftChildIndex], t.Errors[rightChildIndex])
 		}
 	}
 }

@@ -74,5 +74,4 @@ func TestTerrain(t *testing.T) {
 	} else {
 		t.Logf("terrain matches expected at epsilon %f", epsilon)
 	}
-
 }

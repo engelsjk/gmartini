@@ -1,17 +1,18 @@
-package main
+package benchmark
 
 import (
 	"image"
 	"os"
+	"testing"
 
 	"github.com/engelsjk/gmartini/gmartini"
 )
 
-func main() {
+func BenchmarkTile(b *testing.B) {
+
 	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
 	var gridSize int32 = 513
-	var maxError float32 = 50
 
 	file, err := os.Open(terrainFile)
 	if err != nil {
@@ -34,10 +35,7 @@ func main() {
 		panic(err)
 	}
 
-	tile, err := martini.CreateTile(terrain)
-	if err != nil {
-		panic(err)
+	for n := 0; n < b.N; n++ {
+		martini.CreateTile(terrain)
 	}
-
-	_ = tile.GetMesh(gmartini.OptionMaxError(maxError))
 }

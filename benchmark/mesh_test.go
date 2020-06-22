@@ -43,20 +43,6 @@ func benchmarkMesh(maxError float32, b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		tile.GetMesh(gmartini.OptionMaxError(maxError))
 	}
-
-	// fmt.Printf("gmartini\n")
-	// fmt.Printf("***********************\n")
-	// fmt.Printf("gridsize: %d\n", gridSize)
-	// fmt.Printf("terrain: %d\n", len(terrain))
-	// fmt.Printf("max error: %d\n", int(maxError))
-	// fmt.Printf("***********************\n")
-	// fmt.Printf("indices: %d\n", len(martini.Indices))
-	// fmt.Printf("coords: %d\n", len(martini.Coords))
-	// fmt.Printf("***********************\n")
-	// fmt.Printf("mesh vertices: %d\n", len(mesh.Vertices))
-	// fmt.Printf("mesh triangles: %d\n", len(mesh.Triangles))
-	// fmt.Printf("***********************\n")
-
 }
 
 func BenchmarkMeshErr5(b *testing.B)   { benchmarkMesh(5, b) }

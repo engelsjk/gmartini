@@ -1,6 +1,8 @@
 package gmartini
 
-func maxUint16(vars ...uint16) uint16 {
+// float32
+
+func maxFloat32v(vars ...float32) float32 {
 	max := vars[0]
 	for _, i := range vars {
 		if max < i {
@@ -10,27 +12,27 @@ func maxUint16(vars ...uint16) uint16 {
 	return max
 }
 
-func minUint16(vars ...uint16) uint16 {
-	min := vars[0]
-	for _, i := range vars {
-		if min > i {
-			min = i
-		}
+func maxFloat32x2(f1, f2 float32) float32 {
+	if f1 > f2 {
+		return f1
 	}
-	return min
+	return f2
 }
 
-func maxFloat32(vars ...float32) float32 {
-	max := vars[0]
-	for _, i := range vars {
-		if max < i {
-			max = i
+func maxFloat32x3(f1, f2, f3 float32) float32 {
+	if f1 > f2 {
+		if f1 > f3 {
+			return f1
 		}
+		return f3
 	}
-	return max
+	if f2 > f3 {
+		return f2
+	}
+	return f3
 }
 
-func minFloat32(vars ...float32) float32 {
+func minFloat32v(vars ...float32) float32 {
 	min := vars[0]
 	for _, v := range vars {
 		if v < min {
@@ -38,11 +40,6 @@ func minFloat32(vars ...float32) float32 {
 		}
 	}
 	return min
-}
-
-func absInt32(n int32) int32 {
-	y := n >> 31
-	return (n ^ y) - y
 }
 
 func absFloat32(x float32) float32 {
@@ -76,6 +73,13 @@ func equalFloat32(a, b []float32, tol float32) bool {
 		}
 	}
 	return true
+}
+
+// int32
+
+func absInt32(n int32) int32 {
+	y := n >> 31
+	return (n ^ y) - y
 }
 
 func equalInt32(a, b []int32) bool {
