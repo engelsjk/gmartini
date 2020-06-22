@@ -40,8 +40,8 @@ func minFloat32(vars ...float32) float32 {
 	return min
 }
 
-func absUint16(n uint16) uint16 {
-	y := n >> 15
+func absInt32(n int32) int32 {
+	y := n >> 31
 	return (n ^ y) - y
 }
 
@@ -78,19 +78,7 @@ func equalFloat32(a, b []float32, tol float32) bool {
 	return true
 }
 
-func equalUint16(a, b []uint16) bool {
-	if len(a) != len(b) {
-		return false
-	}
-	for i, v := range a {
-		if v != b[i] {
-			return false
-		}
-	}
-	return true
-}
-
-func equalUint32(a, b []uint32) bool {
+func equalInt32(a, b []int32) bool {
 	if len(a) != len(b) {
 		return false
 	}

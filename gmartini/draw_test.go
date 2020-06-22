@@ -41,7 +41,7 @@ func TestDrawTerrain(t *testing.T) {
 	t.Logf("test image saved at %s", imageFile)
 }
 
-func load(terrainFile, encoding string, gridSize uint, maxError float32) ([]float32, *Mesh) {
+func load(terrainFile, encoding string, gridSize int32, maxError float32) ([]float32, *Mesh) {
 
 	file, err := os.Open(terrainFile)
 	if err != nil {
@@ -77,7 +77,7 @@ func TestDrawVerticesErr5(t *testing.T) {
 
 	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
-	var gridSize uint = 513
+	var gridSize int32 = 513
 	var maxError float32 = 5.0
 	var imageFile string = "../test/vertices-%d.png"
 
@@ -96,7 +96,7 @@ func TestDrawVerticesErr50(t *testing.T) {
 
 	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
-	var gridSize uint = 513
+	var gridSize int32 = 513
 	var maxError float32 = 50.0
 	var imageFile string = "../test/vertices-%d.png"
 
@@ -115,7 +115,7 @@ func TestDrawVerticesErr500(t *testing.T) {
 
 	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
-	var gridSize uint = 513
+	var gridSize int32 = 513
 	var maxError float32 = 500.0
 	var imageFile string = "../test/vertices-%d.png"
 
@@ -134,7 +134,7 @@ func TestDrawTrianglesErr5(t *testing.T) {
 
 	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
-	var gridSize uint = 513
+	var gridSize int32 = 513
 	var maxError float32 = 5.0
 	var imageFile string = "test/triangles-%d.png"
 
@@ -153,7 +153,7 @@ func TestDrawTrianglesErr50(t *testing.T) {
 
 	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
-	var gridSize uint = 513
+	var gridSize int32 = 513
 	var maxError float32 = 50.0
 	var imageFile string = "test/triangles-%d.png"
 
@@ -172,7 +172,7 @@ func TestDrawTrianglesErr500(t *testing.T) {
 
 	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
-	var gridSize uint = 513
+	var gridSize int32 = 513
 	var maxError float32 = 500.0
 	var imageFile string = "../test/triangles-%d.png"
 
@@ -191,7 +191,7 @@ func TestDrawAll(t *testing.T) {
 
 	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
-	var gridSize uint = 513
+	var gridSize int32 = 513
 	var maxError float32 = 50.0
 	var imageFile string = "../test/martini-%d.png"
 

@@ -12,7 +12,7 @@ func benchmarkMesh(maxError float32, b *testing.B) {
 
 	var terrainFile string = "../data/fuji.png"
 	var encoding string = "mapbox"
-	var gridSize uint = 513
+	var gridSize int32 = 513
 
 	file, err := os.Open(terrainFile)
 	if err != nil {
