@@ -10,7 +10,7 @@ Sanity checks of porting correctness and static typing nuance provided by refere
 
 ## Benchmark
 
-A benchmark test is included, showing comparable results to [pymartini](https://github.com/kylebarron/pymartini) in mesh generation but slower in preparation steps.
+Benchmarking shows comparable results to [pymartini](https://github.com/kylebarron/pymartini) in mesh generation but slower in preparation steps.
 
 ```bash
 go test ./benchmark -run TestExecutionTime -v
