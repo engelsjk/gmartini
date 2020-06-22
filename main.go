@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"image"
+	"math"
 	"os"
 
 	"github.com/engelsjk/gmartini/gmartini"
@@ -39,15 +40,8 @@ func main() {
 	mesh := tile.GetMesh(gmartini.OptionMaxError(30))
 
 	fmt.Printf("gmartini\n")
-	fmt.Printf("***********************\n")
-	fmt.Printf("gridsize: %d\n", 513)
-	fmt.Printf("terrain: %d\n", len(terrain))
+	fmt.Printf("terrain: %.0f+1 x %.0f+1\n", math.Sqrt(float64(len(terrain)))-1, math.Sqrt(float64(len(terrain)))-1)
 	fmt.Printf("max error: %d\n", 30)
-	fmt.Printf("***********************\n")
-	fmt.Printf("indices: %d\n", len(martini.Indices))
-	fmt.Printf("coords: %d\n", len(martini.Coords))
-	fmt.Printf("***********************\n")
-	fmt.Printf("mesh vertices: %d\n", len(mesh.Vertices))
-	fmt.Printf("mesh triangles: %d\n", len(mesh.Triangles))
-	fmt.Printf("***********************\n")
+	fmt.Printf("mesh vertices: %d\n", mesh.NumVertices)
+	fmt.Printf("mesh triangles: %d\n", mesh.NumTriangles)
 }
