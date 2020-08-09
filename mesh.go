@@ -1,5 +1,7 @@
 package gmartini
 
+import gmu "github.com/engelsjk/gomathutils"
+
 type Mesh struct {
 	MaxError     float32
 	NumVertices  int32
@@ -61,7 +63,7 @@ func (m *Mesh) countElements(tile *Tile, ax, ay, bx, by, cx, cy int32) {
 
 	middleIndex := my*tile.GridSize + mx
 
-	if absInt32(ax-cx)+absInt32(ay-cy) > 1 && tile.Errors[middleIndex] > m.MaxError {
+	if gmu.AbsInt32(ax-cx)+gmu.AbsInt32(ay-cy) > 1 && tile.Errors[middleIndex] > m.MaxError {
 		m.countElements(tile, cx, cy, ax, ay, mx, my)
 		m.countElements(tile, bx, by, cx, cy, mx, my)
 	} else {
@@ -95,7 +97,7 @@ func (m *Mesh) processTriangle(tile *Tile, ax, ay, bx, by, cx, cy int32) {
 
 	middleIndex := my*tile.GridSize + mx
 
-	if absInt32(ax-cx)+absInt32(ay-cy) > 1 && tile.Errors[middleIndex] > m.MaxError {
+	if gmu.AbsInt32(ax-cx)+gmu.AbsInt32(ay-cy) > 1 && tile.Errors[middleIndex] > m.MaxError {
 		// triangle doesn't approximate the surface well enough; drill down further
 		m.processTriangle(tile, cx, cy, ax, ay, mx, my)
 		m.processTriangle(tile, bx, by, cx, cy, mx, my)

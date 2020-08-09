@@ -8,6 +8,8 @@ import (
 	"io"
 	"os"
 	"testing"
+
+	gmu "github.com/engelsjk/gomathutils"
 )
 
 // references
@@ -56,19 +58,19 @@ func TestTerrain(t *testing.T) {
 	}
 
 	var max, min float32
-	max, min = maxminFloat32(terrain)
+	max, min = gmu.MaxminFloat32(terrain)
 	t.Logf("terrain: %f max, %f min", max, min)
-	max, min = maxminFloat32(expectedTerrain)
+	max, min = gmu.MaxminFloat32(expectedTerrain)
 	t.Logf("expected terrain: %f max, %f min", max, min)
 
 	for i, v := range terrain {
 		delta := v - expectedTerrain[i]
-		if absFloat32(delta) > epsilon {
+		if gmu.AbsFloat32(delta) > epsilon {
 			t.Logf("terrain mismatch exceeding %f epsilon: calculated %f, expected %f (delta %f)", epsilon, v, expectedTerrain[i], delta)
 		}
 	}
 
-	if !equalFloat32(terrain, expectedTerrain, epsilon) {
+	if !gmu.EqualFloat32(terrain, expectedTerrain, epsilon) {
 		t.Logf("terrain doesn't match expected at epsilon %f", epsilon)
 		t.Fail()
 	} else {

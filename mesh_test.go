@@ -5,6 +5,8 @@ import (
 	_ "image/png"
 	"os"
 	"testing"
+
+	gmu "github.com/engelsjk/gomathutils"
 )
 
 func testMesh(expectedVertices, expectedTriangles []int32, maxError float32, t *testing.T) {
@@ -41,14 +43,14 @@ func testMesh(expectedVertices, expectedTriangles []int32, maxError float32, t *
 
 	mesh := tile.GetMesh(OptionMaxError(maxError))
 
-	if !equalInt32(mesh.Vertices, expectedVertices) {
+	if !gmu.EqualInt32(mesh.Vertices, expectedVertices) {
 		t.Logf("mesh vertices doesn't match expected at max error %f", maxError)
 		t.Fail()
 	} else {
 		t.Logf("mesh vertices matches expected at max error %f", maxError)
 	}
 
-	if !equalInt32(mesh.Triangles, expectedTriangles) {
+	if !gmu.EqualInt32(mesh.Triangles, expectedTriangles) {
 		t.Logf("mesh triangles doesn't match expected at max error %f", maxError)
 		t.Fail()
 	} else {

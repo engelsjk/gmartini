@@ -2,6 +2,8 @@ package gmartini
 
 import (
 	"fmt"
+
+	gmu "github.com/engelsjk/gomathutils"
 )
 
 type Tile struct {
@@ -65,14 +67,14 @@ func (t *Tile) update() {
 
 		interpolatedHeight = (t.Terrain[aIndex] + t.Terrain[bIndex]) / 2
 		middleIndex = my*t.GridSize + mx
-		middleError = absFloat32(interpolatedHeight - t.Terrain[middleIndex])
+		middleError = gmu.AbsFloat32(interpolatedHeight - t.Terrain[middleIndex])
 
-		t.Errors[middleIndex] = maxFloat32x2(t.Errors[middleIndex], middleError)
+		t.Errors[middleIndex] = gmu.MaxFloat32x2(t.Errors[middleIndex], middleError)
 
 		if i < t.NumParentTriangles { // bigger triangles; accumulate error with children
 			leftChildIndex = ((ay+cy)>>1)*t.GridSize + ((ax + cx) >> 1)
 			rightChildIndex = ((by+cy)>>1)*t.GridSize + ((bx + cx) >> 1)
-			t.Errors[middleIndex] = maxFloat32x3(t.Errors[middleIndex], t.Errors[leftChildIndex], t.Errors[rightChildIndex])
+			t.Errors[middleIndex] = gmu.MaxFloat32x3(t.Errors[middleIndex], t.Errors[leftChildIndex], t.Errors[rightChildIndex])
 		}
 	}
 }

@@ -10,6 +10,7 @@ import (
 	"testing"
 
 	"github.com/engelsjk/cturbo"
+	gmu "github.com/engelsjk/gomathutils"
 	"github.com/fogleman/gg"
 )
 
@@ -21,12 +22,12 @@ func drawTerrain(dc *gg.Context, terrain []float32) {
 	lowRight := image.Point{size, size}
 	img := image.NewRGBA(image.Rectangle{upLeft, lowRight})
 
-	maxZ, minZ := maxminFloat32(terrain)
+	maxZ, minZ := gmu.MaxminFloat32(terrain)
 
 	for y := 0; y < size; y++ {
 		for x := 0; x < size; x++ {
 			k := y*size + x
-			v := minFloat32v(max, max*minFloat32v((terrain[k]-minZ)/(maxZ-minZ), cutoff)/cutoff)
+			v := gmu.MinFloat32v(max, max*gmu.MinFloat32v((terrain[k]-minZ)/(maxZ-minZ), cutoff)/cutoff)
 			r, g, b, a := cturbo.Map(float64(v), 255)
 			img.Set(x, y, color.RGBA{r, g, b, a})
 		}
