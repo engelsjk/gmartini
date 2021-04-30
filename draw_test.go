@@ -3,13 +3,13 @@ package gmartini
 import (
 	"fmt"
 	"image"
-	"image/color"
 	_ "image/png"
 	"math"
 	"os"
 	"testing"
 
-	"github.com/engelsjk/cturbo"
+	"github.com/engelsjk/colormap"
+	"github.com/engelsjk/colormap/palette"
 	gmu "github.com/engelsjk/gomathutils"
 	"github.com/fogleman/gg"
 )
@@ -24,12 +24,14 @@ func drawTerrain(dc *gg.Context, terrain []float32) {
 
 	maxZ, minZ := gmu.MaxminFloat32(terrain)
 
+	cm := colormap.Colormap{Palette: palette.Turbo{}}
+
 	for y := 0; y < size; y++ {
 		for x := 0; x < size; x++ {
 			k := y*size + x
 			v := gmu.MinFloat32v(max, max*gmu.MinFloat32v((terrain[k]-minZ)/(maxZ-minZ), cutoff)/cutoff)
-			r, g, b, a := cturbo.Map(float64(v), 255)
-			img.Set(x, y, color.RGBA{r, g, b, a})
+			px := cm.ToRGBA(float64(v), 255)
+			img.Set(x, y, px)
 		}
 	}
 	dc.DrawImage(img, 0, 0)

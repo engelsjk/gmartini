@@ -1,11 +1,11 @@
-github.com/engelsjk/cturbo v0.0.0-20200622001320-954b84e010c2 h1:HrCGWLE/D9wCXKaChH4CNG7OiBm0QMVqQRekkldKzOs=
-github.com/engelsjk/cturbo v0.0.0-20200622001320-954b84e010c2/go.mod h1:PuzoUrcwz7uahIM9HhWhnAxCNqOLQ2mxcr3OcqhIf+I=
-github.com/engelsjk/gomathutils v0.0.0-20200809212554-7d71f8189d4b h1:j09s6unaf9YLVpnVzM0pNys85tOUsifWps/E97qanEs=
-github.com/engelsjk/gomathutils v0.0.0-20200809212554-7d71f8189d4b/go.mod h1:pFnmSVWbXjaWOCbLytSk3KDJfI97aggV2xL6wsO0sJ8=
+github.com/engelsjk/colormap v0.0.0-20210424004146-1a9b1ef81ca3 h1:wu69WFw9Abr5m3lrrO15+u4HH9BHVzAX/BFSEJxSc0s=
+github.com/engelsjk/colormap v0.0.0-20210424004146-1a9b1ef81ca3/go.mod h1:VI62k4pok3e7IQyhDqJ5ffFR2El02JtPiNN7TbmaqM4=
+github.com/engelsjk/gomathutils v0.0.0-20200809214211-f547ed365720 h1:M8JGWEzzN1ayyln72BeNO1qv4J/sV0UhBKGGsG+cAlY=
+github.com/engelsjk/gomathutils v0.0.0-20200809214211-f547ed365720/go.mod h1:pFnmSVWbXjaWOCbLytSk3KDJfI97aggV2xL6wsO0sJ8=
 github.com/fogleman/gg v1.3.0 h1:/7zJX8F6AaYQc57WQCyN9cAIz+4bCJGO9B+dyW29am8=
 github.com/fogleman/gg v1.3.0/go.mod h1:R/bRT+9gY/C5z7JzPU0zXsXHKM4/ayA+zqcVNZzPa1k=
 github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 h1:DACJavvAHhabrF08vX0COfcOBJRhZ8lUbR+ZWIs0Y5g=
 github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0/go.mod h1:E/TSTwGwJL78qG/PmXZO1EjYhfJinVAhrmmHX6Z8B9k=
-golang.org/x/image v0.0.0-20200618115811-c13761719519 h1:1e2ufUJNM3lCHEY5jIgac/7UTjd6cgJNdatjPdFWf34=
-golang.org/x/image v0.0.0-20200618115811-c13761719519/go.mod h1:FeLwcggjj3mMvU+oOTbSwawSJRM1uh48EjtB4UJZlP0=
+golang.org/x/image v0.0.0-20210220032944-ac19c3e999fb h1:fqpd0EBDzlHRCjiphRR5Zo/RSWWQlWv34418dnEixWk=
+golang.org/x/image v0.0.0-20210220032944-ac19c3e999fb/go.mod h1:FeLwcggjj3mMvU+oOTbSwawSJRM1uh48EjtB4UJZlP0=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
